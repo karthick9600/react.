@@ -1,0 +1,260 @@
+# React Learning Notes
+
+A collection of React concepts with simple explanations, code examples, and expected outputs.
+
+## 1. Components
+
+**Definition:** Components are reusable building blocks of a React application.
+
+```jsx
+function Welcome() {
+  return <h1>Welcome to React!</h1>;
+}
+
+export default function App() {
+  return <Welcome />;
+}
+```
+
+**Output:** Welcome to React!
+
+## 2. Props
+
+**Definition:** Props are used to pass data from one component to another.
+
+```jsx
+function Student({ name }) {
+  return <h2>Hello, {name}!</h2>;
+}
+
+export default function App() {
+  return <Student name="Karthick" />;
+}
+```
+
+**Output:** Hello, Karthick!
+
+## 3. useState
+
+**Definition:** `useState` is a React Hook used to store and update component state.
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount(count + 1)}>
+        Increase
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+**Output:** Clicking the button changes the count from 0 to 1, 2, 3, and so on.
+
+## 4. useEffect
+
+**Definition:** `useEffect` is used to synchronize a component with external systems, such as APIs or browser events.
+
+```jsx
+import { useEffect } from "react";
+
+function App() {
+  useEffect(() => {
+    console.log("Component loaded!");
+  }, []);
+
+  return <h1>Learn React</h1>;
+}
+
+export default App;
+```
+
+**Output:** The browser console displays `Component loaded!` after the component mounts.
+
+## 5. Conditional Rendering
+
+**Definition:** Conditional rendering displays different content based on a condition.
+
+```jsx
+function App() {
+  const isLoggedIn = true;
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <h2>Welcome Back!</h2>
+      ) : (
+        <h2>Please Login</h2>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+**Output:** Welcome Back!
+
+## 6. Lists Using map()
+
+**Definition:** The `map()` method renders multiple elements from an array.
+
+```jsx
+function App() {
+  const skills = ["HTML", "CSS", "JavaScript", "React"];
+
+  return (
+    <ul>
+      {skills.map((skill) => (
+        <li key={skill}>{skill}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default App;
+```
+
+**Output:**
+- HTML
+- CSS
+- JavaScript
+- React
+
+**Note:** Use a unique and stable `key` for each list item.
+
+## 7. Event Handling
+
+**Definition:** Event handling allows React applications to respond to user actions, such as button clicks.
+
+```jsx
+function App() {
+  function showMessage() {
+    alert("Hello Karthick!");
+  }
+
+  return (
+    <button onClick={showMessage}>
+      Click Me
+    </button>
+  );
+}
+
+export default App;
+```
+
+**Output:** Clicking the button displays an alert message.
+
+## 8. useRef
+
+**Definition:** `useRef` stores a value between renders without triggering a re-render when the value changes. It can also reference DOM elements.
+
+```jsx
+import { useRef } from "react";
+
+function App() {
+  const inputRef = useRef(null);
+
+  return (
+    <div>
+      <input ref={inputRef} placeholder="Enter name" />
+      <button onClick={() => inputRef.current.focus()}>
+        Focus Input
+      </button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+**Output:** Clicking the button places the cursor inside the input field.
+
+## 9. React 19 — useActionState
+
+**Definition:** `useActionState` is a React Hook that manages the result of an Action, including form submission state.
+
+```jsx
+import { useActionState } from "react";
+
+async function submitForm(previousState, formData) {
+  const name = formData.get("name");
+  return `Hello, ${name}!`;
+}
+
+function App() {
+  const [message, formAction, isPending] =
+    useActionState(submitForm, "");
+
+  return (
+    <form action={formAction}>
+      <input
+        name="name"
+        placeholder="Your name"
+        required
+      />
+
+      <button disabled={isPending}>
+        {isPending ? "Submitting..." : "Submit"}
+      </button>
+
+      <p>{message}</p>
+    </form>
+  );
+}
+
+export default App;
+```
+
+**Output:** Entering a name and submitting the form displays a personalized greeting.
+
+**Note:** Production forms may also need validation, error handling, and server-side processing.
+
+## 10. React Compiler
+
+**Definition:** React Compiler automatically optimizes supported React code, reducing the need for manual memoization in many cases.
+
+```jsx
+function Product({ price, quantity }) {
+  const total = price * quantity;
+
+  return <h2>Total: ?{total}</h2>;
+}
+
+export default Product;
+```
+
+**Output:** Displays the calculated product total.
+
+**Note:** React Compiler must be configured in the project. It does not eliminate every re-render.
+
+## Additional Topics to Learn
+
+1. `useReducer` — Manage complex state logic.
+2. `useContext` — Share data across components.
+3. `useOptimistic` — Display optimistic UI updates.
+4. `useActionState` — Manage Action and form state.
+5. Server Components — Render supported components on the server.
+6. React Router — Navigate between pages.
+7. API Fetching — Retrieve data from external APIs.
+8. Error Handling — Handle application errors.
+9. Performance Optimization — Improve application performance.
+10. Responsive Design — Build layouts for different screen sizes.
+
+## Official Documentation
+
+- React Learn: https://react.dev/learn
+- React API Reference: https://react.dev/reference
+- React Blog: https://react.dev/blog
+
+## Learning Goal
+
+Understand React fundamentals, practice each example, and gradually build advanced, responsive, and maintainable web applications.
